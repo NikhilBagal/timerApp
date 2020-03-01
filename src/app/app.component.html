@@ -1,14 +1,14 @@
 <div class="timer">
   <div class="minute-sec">
     <h3>Minutes</h3>
-    <button>+</button>
-    <h2>1</h2>
-    <button>-</button>
+    <button (click)="increment($event)" class="minute">+</button>
+    <h2>{{minutes}}</h2>
+    <button (click)="decrement($event)" class="minute">-</button>
   </div>
   <div class="second-sec">
     <h3>Seconds</h3>
-    <button>+</button>
-    <h2>1</h2>
-    <button>-</button>
+    <button (click)="increment($event)" class="second">+</button>
+    <h2>{{seconds}}</h2>
+    <button (click)="decrement($event)" class="second">-</button>
   </div>
 </div>

@@ -6,5 +6,39 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'timerApp';
+  minutes:number=0;
+  seconds:number=0;
+  increment(param){
+   // console.log(param.target.className)
+   // param.target.className === 'minute' ? this.minutes++: this.seconds++ 
+    if(param.target.className === 'minute'){
+      if(this.minutes < 60){
+        this.minutes++
+      }else {
+        this.minutes = this.minutes
+      }
+    }else{
+      if(this.seconds < 60){
+        this.seconds++
+      }else {
+        this.seconds = this.seconds
+      }
+    }
+  }
+  decrement(param){
+   // param.target.className === 'minute' ? this.minutes--: this.seconds-- 
+    if(param.target.className === 'minute'){
+      if(this.minutes > 0){
+        this.minutes--
+      }else {
+        this.minutes = this.minutes
+      }
+    }else{
+      if(this.seconds > 0){
+        this.seconds--
+      }else {
+        this.seconds = this.seconds
+      }
+    }
+  }
 }
