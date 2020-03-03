@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   minutes:number=0;
   seconds:number=0;
+  isTimeUp:boolean=false;
   increment(param){
    // console.log(param.target.className)
    // param.target.className === 'minute' ? this.minutes++: this.seconds++ 
@@ -40,5 +41,17 @@ export class AppComponent {
         this.seconds = this.seconds
       }
     }
+  }
+
+  startTimer(){
+    var start = setInterval(()=> {
+    if(this.seconds>0){
+      this.seconds =  this.seconds-1
+      this.isTimeUp = false
+      }else{
+        clearInterval(start)
+        this.isTimeUp = true
+      }
+    },900)
   }
 }
