@@ -6,12 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  countdown;
   minutes:number=0;
   seconds:number=0;
   isTimeUp:boolean=false;
   increment(param){
-   // console.log(param.target.className)
-   // param.target.className === 'minute' ? this.minutes++: this.seconds++ 
     if(param.target.className === 'minute'){
       if(this.minutes < 60){
         this.minutes++
@@ -27,7 +26,6 @@ export class AppComponent {
     }
   }
   decrement(param){
-   // param.target.className === 'minute' ? this.minutes--: this.seconds-- 
     if(param.target.className === 'minute'){
       if(this.minutes > 0){
         this.minutes--
@@ -44,14 +42,28 @@ export class AppComponent {
   }
 
   startTimer(){
-    var start = setInterval(()=> {
-    if(this.seconds>0){
-      this.seconds =  this.seconds-1
-      this.isTimeUp = false
-      }else{
-        clearInterval(start)
-        this.isTimeUp = true
+    const totalSec = this.minutes*60+this.seconds
+    this.timer(totalSec)
+    this.isTimeUp=false
+  }
+  timer(second){
+    const now = Date.now()
+    const then = now + second * 1000
+    clearInterval(this.countdown)
+    this.countdown = setInterval(()=>{
+      const secondsLeft = Math.round((then-Date.now())/1000)
+      if(secondsLeft<0){
+        clearInterval(this.countdown);
+        this.isTimeUp=true
+        return
       }
-    },900)
+      this.display(secondsLeft)
+    },1000)
+  }
+  display(second){
+    const minute = Math.floor(second/60)
+    const remainderSeconds = second % 60
+    this.minutes=minute;
+    this.seconds=remainderSeconds;
   }
 }
